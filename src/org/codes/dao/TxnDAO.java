@@ -22,6 +22,8 @@ public class TxnDAO implements TxnDialects {
             int accountNumber = resultSet.getInt("accountNumber");
             setTxnIntoMap(transactionsMap, resultSet, accountNumber);
         }
+        preparedStatement.close();
+        connection.close();
         return transactionsMap;
     }
 
@@ -34,6 +36,7 @@ public class TxnDAO implements TxnDialects {
 
         Transaction txn = Transaction.retrTxn(txnHash, accountNumber, amount, mode, createTime);
         transactionsMap.put(txnHash, txn);
+
     }
 
     public static HashMap<Long, Transaction> getTransactionsByAccount(int accountNumber) throws SQLException, IOException, ClassNotFoundException {
@@ -48,6 +51,8 @@ public class TxnDAO implements TxnDialects {
             //            int accountNumber = resultSet.getInt("accountNumber");
             setTxnIntoMap(transactionsMap, resultSet, accountNumber);
         }
+        preparedStatement.close();
+        connection.close();
         return transactionsMap;
     }
 
@@ -66,6 +71,9 @@ public class TxnDAO implements TxnDialects {
         transaction.setMode(Mode.valueOf(resultSet.getString("mode")));
         transaction.setCreateTime(resultSet.getTimestamp("createTime"));
 
+        preparedStatement.close();
+        connection.close();
+
         return transaction;
     }
 
@@ -78,7 +86,12 @@ public class TxnDAO implements TxnDialects {
         preparedStatement.setFloat(3, transaction.getAmount());
         preparedStatement.setString(4, transaction.getMode().name());
         preparedStatement.setTimestamp(5, transaction.getCreateTime());
-        return preparedStatement.executeUpdate();
+        int rowsModified = preparedStatement.executeUpdate();
+
+        preparedStatement.close();
+        connection.close();
+
+        return rowsModified;
 
     }
 
