@@ -9,6 +9,7 @@ public class Transaction {
     int accountNumber;
     float amount;
     Mode mode;
+    Timestamp createTime;
 
     public long getTxnHash() {
         return txnHash;
@@ -62,6 +63,6 @@ public class Transaction {
         return txn;
     }
 
-    Timestamp createTime;
+
 
 }
