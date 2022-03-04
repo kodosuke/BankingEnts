@@ -1,7 +1,7 @@
 package org.codes.dao;
 
 import org.codes.beans.Transaction;
-import org.codes.dao.interfaces.TxnDialects;
+import org.codes.dao.dialects.TxnDialects;
 import org.codes.utils.Mode;
 import org.codes.utils.Records;
 

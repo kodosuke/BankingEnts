@@ -1,4 +1,4 @@
-package org.codes.dao.interfaces;
+package org.codes.dao.dialects;
 
 public interface TxnDialects {
     String ALL_TRANSACTIONS = "SELECT * FROM transactions";
