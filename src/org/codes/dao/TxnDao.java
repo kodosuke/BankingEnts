@@ -43,6 +43,7 @@ public class TxnDao implements TxnDialects {
         transaction.setMode(Mode.valueOf(resultSet.getString("mode")));
         transaction.setCreateTime(resultSet.getTimestamp("createTime"));
 
+        resultSet.close();
         preparedStatement.close();
         connection.close();
 
@@ -68,8 +69,11 @@ public class TxnDao implements TxnDialects {
             Transaction txn = Transaction.retrTxn(txnHash, accountNumber, amount, mode, createTime);
             transactionsMap.put(txnHash, txn);
         }
+
+        resultSet.close();
         preparedStatement.close();
         connection.close();
+
         return transactionsMap;
     }
 

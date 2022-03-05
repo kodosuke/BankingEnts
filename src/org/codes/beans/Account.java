@@ -61,7 +61,7 @@ public class Account {
         this.accountNumber = accountNumber;
     }
 
-    public static Account retrAccount(int accountNumber, String customerName, float balance, String password, Timestamp createTime) {
+    public static Account retrAccount(int accountNumber, String customerName, Type accountType, float balance, String password, Timestamp createTime) {
 
         Account account = new Account();
 
@@ -70,6 +70,7 @@ public class Account {
         account.setBalance(balance);
         account.setPassword(password);
         account.setCreateTime(createTime);
+        account.setAccountType(accountType);
 
         return account;
     }
