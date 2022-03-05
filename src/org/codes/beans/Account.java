@@ -1,5 +1,7 @@
 package org.codes.beans;
 
+import org.codes.utils.Type;
+
 import java.sql.Timestamp;
 
 public class Account {
@@ -9,6 +11,15 @@ public class Account {
     float balance;
     String password;
     Timestamp createTime;
+    Type accountType;
+
+    public Type getAccountType() {
+        return accountType;
+    }
+
+    public void setAccountType(Type accountType) {
+        this.accountType = accountType;
+    }
 
     public String getCustomerName() {
         return customerName;
@@ -62,4 +73,40 @@ public class Account {
 
         return account;
     }
+
+    public boolean deposit(float amount) {
+
+        if (amount >= 1) {
+            this.balance += amount;
+            System.out.println("Dear customer, Account " + this.accountNumber + " has been credited with $ " + amount +
+                    " . Your current account balance is $ " + this.balance + " .");
+            return true;
+
+        } else {
+            System.out.println("Minimum deposit is $ 1 .");
+            return false;
+        }
+    }
+
+    public boolean withdraw(float amount) {
+
+        if (amount <= this.balance) {
+            this.balance -= amount;
+            System.out.println("Dear customer, Account " + this.accountNumber + " has been debited with $ " + amount + " . Your current account balance is $ " + this.balance + " .");
+            return true;
+        } else {
+            System.out.println("Dear customer, your account balance is insufficient for making this transaction.");
+            return false;
+        }
+    }
+
+//    public Account transfer(Account destination, float amount) {
+//
+//        if(this.withdraw(amount)) {
+//
+//        }
+//    }
+
+
 }
+

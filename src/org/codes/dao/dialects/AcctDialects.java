@@ -7,5 +7,5 @@ public interface AcctDialects {
     String UPDATE_PASSWORD = "UPDATE accounts SET password = ? WHERE accountNumber = ?";
     String RETRIEVE_PASSWORD = "SELECT password FROM accounts WHERE accountNumber = ?";
     String INSERT_ACCOUNT = "INSERT INTO accounts(accountNumber, customerName, balance, password, createTime) VALUES(?, ?, ?, ?, ?)";
-
+    String GET_BALANCE = "SELECT balance FROM accounts WHERE accountNumber = ?";
 }
