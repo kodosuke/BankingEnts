@@ -63,8 +63,6 @@ public class AccountDao implements AcctDialects {
         resultSet.close();
         preparedStatement.close();
         connection.close();
-
         return recentAccountNumber;
     }
-
 }
