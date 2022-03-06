@@ -9,4 +9,6 @@ public interface AcctDialects {
     String INSERT_ACCOUNT = "INSERT INTO accounts(accountNumber, customerName, balance, password, createTime, type) VALUES(?, ?, ?, ?, ?, ?)";
     String GET_BALANCE = "SELECT balance FROM accounts WHERE accountNumber = ?";
     String READ_RECENT_ACCOUNT = "SELECT accountNumber from accounts order by accountNumber DESC LIMIT 1";
+    String CHECK_ACCOUNT = "SELECT 1 FROM accounts WHERE accountNumber = ? LIMIT 1";
+    String DELETE_ACCOUNT = "DELETE FROM accounts WHERE accountNumber = ?";
 }

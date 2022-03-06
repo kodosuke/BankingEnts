@@ -9,7 +9,7 @@ import java.io.IOException;
 import java.sql.*;
 import java.util.HashMap;
 
-public class TxnDao implements TxnDialects {
+public class TxnDao implements TxnDialects, Columns {
 
     public static int insertTransaction(Transaction transaction) throws SQLException, IOException, ClassNotFoundException, SQLException, IOException {
 
@@ -38,10 +38,10 @@ public class TxnDao implements TxnDialects {
         Transaction transaction = new Transaction();
 
         transaction.setTxnHash(txnHash);
-        transaction.setAccountNumber(resultSet.getInt("accountNumber"));
-        transaction.setAmount(resultSet.getFloat("amount"));
-        transaction.setMode(Mode.valueOf(resultSet.getString("mode")));
-        transaction.setCreateTime(resultSet.getTimestamp("createTime"));
+        transaction.setAccountNumber(resultSet.getInt(ACCOUNT_NUMBER));
+        transaction.setAmount(resultSet.getFloat(AMOUNT));
+        transaction.setMode(Mode.valueOf(resultSet.getString(MODE)));
+        transaction.setCreateTime(resultSet.getTimestamp(TXN_TIMESTAMP));
 
         resultSet.close();
         preparedStatement.close();
@@ -61,10 +61,10 @@ public class TxnDao implements TxnDialects {
 
         while (resultSet.next()) {
             //            int accountNumber = resultSet.getInt("accountNumber");
-            long txnHash = resultSet.getLong("txnHash");
-            float amount = resultSet.getFloat("amount");
-            Mode mode = Mode.valueOf(resultSet.getString("mode"));
-            Timestamp createTime = resultSet.getTimestamp("createTime");
+            long txnHash = resultSet.getLong(TXN_NUMBER);
+            float amount = resultSet.getFloat(AMOUNT);
+            Mode mode = Mode.valueOf(resultSet.getString(MODE));
+            Timestamp createTime = resultSet.getTimestamp(TXN_TIMESTAMP);
 
             Transaction txn = Transaction.retrTxn(txnHash, accountNumber, amount, mode, createTime);
             transactionsMap.put(txnHash, txn);

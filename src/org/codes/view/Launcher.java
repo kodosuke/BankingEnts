@@ -36,7 +36,7 @@ public class Launcher {
                     registerNewAccount(scanner);
                     break;
                 case '2':
-                    LogIn.loginToAccount(scanner);
+                    new LogIn().loginToAccount(scanner);
                     break;
                 default:
                     quit = true;

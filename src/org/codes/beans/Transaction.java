@@ -63,6 +63,14 @@ public class Transaction {
         return txn;
     }
 
-
-
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "txnHash= " + txnHash +
+                ", accountNumber= " + accountNumber +
+                ", amount= " + amount +
+                ", mode= " + mode +
+                ", createTime= " + createTime +
+                '}';
+    }
 }

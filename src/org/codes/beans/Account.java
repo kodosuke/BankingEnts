@@ -91,7 +91,7 @@ public class Account {
 
     public boolean withdraw(float amount) {
 
-        if (amount <= this.balance) {
+        if (amount <= this.balance && amount > 0) {
             this.balance -= amount;
             System.out.println("Dear customer, Account " + this.accountNumber + " has been debited with $ " + amount + " . Your current account balance is $ " + this.balance + " .");
             return true;
@@ -101,13 +101,16 @@ public class Account {
         }
     }
 
-//    public Account transfer(Account destination, float amount) {
-//
-//        if(this.withdraw(amount)) {
-//
-//        }
-//    }
-
-
+    @Override
+    public String toString() {
+        return "Account{" +
+                "accountNumber= " + accountNumber +
+                ", customerName= '" + customerName + '\'' +
+                ", balance= " + balance +
+//                ", password= '" + password + '\'' +
+                ", createTime= " + createTime +
+                ", accountType= " + accountType +
+                '}';
+    }
 }
 
