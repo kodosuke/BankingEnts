@@ -1,4 +1,4 @@
-package org.codes.dao;
+package org.codes.dao.columns;
 
 public interface Columns {
 

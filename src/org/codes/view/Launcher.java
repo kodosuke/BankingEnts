@@ -48,7 +48,7 @@ public class Launcher {
 
 
     private static void registerNewAccount(Scanner scanner) throws SQLException, IOException, ClassNotFoundException {
-        System.out.println(accountNumTracker);
+//        System.out.println(accountNumTracker);
         System.out.println("Let's create a new account for you.");
         System.out.println("Enter your full name :: ");
         String customerName = scanner.nextLine().strip();

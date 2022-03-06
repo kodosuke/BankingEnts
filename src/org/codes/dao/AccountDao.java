@@ -1,6 +1,7 @@
 package org.codes.dao;
 
 import org.codes.beans.Account;
+import org.codes.dao.columns.Columns;
 import org.codes.dao.dialects.AcctDialects;
 import org.codes.utils.Records;
 import org.codes.utils.Type;
