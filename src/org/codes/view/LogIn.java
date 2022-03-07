@@ -81,7 +81,7 @@ public class LogIn {
                         AccountDao.updateBalance(destination);
                         long txnHash = HashCode.generateHash(destAccNumber, amount, Mode.CREDIT);
                         TxnDao.insertTxnByFields(txnHash, destAccNumber, amount, Mode.CREDIT, new Timestamp(new Date().getTime()));
-                        System.out.println("Dear customer, the amount has been successfully to the account " + destAccNumber);
+//                        System.out.println("Dear customer, the amount has been successfully to the account " + destAccNumber);
                         break;
                     }
                 case '5':
@@ -106,8 +106,14 @@ public class LogIn {
                     currentPassword = scanner.nextLine().strip();
                     if(Objects.equals(AccountDao.readPassword(account.getAccountNumber()), currentPassword)) {
                         AccountDao.deleteAccount(accountNumber);
+                        System.out.println("Deleted account " + accountNumber);
+                        logInState = false;
+                        account = null;
+                        System.out.println("Logged out.");
                     }
-                    System.out.println("Deleted account " + accountNumber);
+                    System.out.println("Deletion failed. Try again with correct password.");
+                    break;
+
 
                 default:
                     logInState = false;
