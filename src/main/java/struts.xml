@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts  
+Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">  
+
+<struts>
+<constant name = "struts.devMode" value = "true" />
+
+<constant name="struts.convention.result.path" value="/"/>
+
+<package name="basic" namespace="/" extends="struts-default">
+
+	<interceptors>
+	<interceptor name="loginInterceptor" class="org.interceptors.LoginInterceptor"/>
+	<interceptor-stack name="loginStack">
+		<interceptor-ref name="loginInterceptor"/>
+		<interceptor-ref name="defaultStack"/>
+	</interceptor-stack>
+	</interceptors>
+
+	<global-results>
+		<result name="login">
+			/pages/login.jsp
+		</result>
+		<result name="error">
+			/pages/error.jsp
+		</result>
+	</global-results>
+	
+	<global-exception-mappings>
+    <exception-mapping exception="java.lang.Exception" result="error" />
+	</global-exception-mappings>
+	
+	
+	<action name="home">
+		<interceptor-ref name="loginStack"></interceptor-ref>
+		<result>/pages/profile.jsp</result>
+	</action>
+	
+	<action name="loginAction" class="org.actions.SignUser" method="loginUser">
+		<result name="success" type="redirect">home.action</result>
+	</action>
+	
+	<action name="logOutAction" class="org.actions.SignUser" method="logOut">
+		<interceptor-ref name="loginStack"/>
+		<result name="success" type="redirect">login.action</result>
+	</action>
+	
+	<action name="registerUser" class="org.actions.RegisterUser" method="registerUser">
+		<result name="success">/pages/login.jsp</result>
+	</action>
+	
+	<action name="register">
+		<result> /pages/register.jsp</result>
+	</action>
+	
+	<action name="depositAction"><result>/pages/deposit.jsp</result></action>
+	<action name="processDeposit" class="org.actions.DepositAction" method="deposit">
+		<result>/pages/deposit.jsp</result>
+	</action>
+	
+	<action name="withdrawAction"><result>/pages/withdraw.jsp</result></action>
+	<action name="processWithdraw" class="org.actions.WithdrawAction" method="withdraw">
+		<result>/pages/withdraw.jsp</result>
+	</action>
+	
+	<action name="transferAction"><result>/pages/transfer.jsp</result></action>
+		<action name="processTransfer" class="org.actions.TransferAction" method="transfer">
+		<result>/pages/transfer.jsp</result>
+	</action>
+	
+	<action name="changePassword"><result>/pages/changePassword.jsp</result></action>
+	<action name="changePwd" class="org.actions.ChangePassword" method="updatePassword">
+		<result>/pages/changePassword.jsp</result>
+	</action>
+	
+	<action name="deleteUserAction" class="org.actions.DeleteAction" method="delete">
+		<result name="success">/pages/login.jsp</result>
+		<result name="error">/pages/profile.jsp</result>
+	</action>
+	
+	<action name="showTxnAction" class="org.actions.ShowTransactions" method="view">
+		<result>/pages/showTxns.jsp</result>
+	</action>
+	
+	<action name="login"> <result> /pages/login.jsp</result></action>
+	<action name=""><result type="redirect">home.action</result></action>
+</package>
+</struts>
