@@ -32,15 +32,15 @@
         			<li><a class="dropdown-item" href="#">Apply loan</a></li>
         		</ul>
         </li> -->
-        <li class="nav-item "><a class="nav-link text-white" href="#">View statements</a></li>
+        <li class="nav-item "><a class="nav-link text-white" href="showTransactions">View statements</a></li>
         </ul> 
 		<ul class="navbar-nav">
 
          <li class="nav-item dropdown">
-        	<a class="nav-link dropdown-toggle text-white" href="#" id="retailBankingDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account settings</a>
-        		<ul class="dropdown-menu" aria-labelledby="retailBankingDropdown">
-        			<li><a class="dropdown-item" href="#">Change password</a></li>
-        			<li><a class="dropdown-item text-danger" href="#">Request account deletion</a></li>
+        	<a class="nav-link dropdown-toggle text-white" href="#" id="settingsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Account settings</a>
+        		<ul class="dropdown-menu" aria-labelledby="settingsDropdown">
+        			<li><a class="dropdown-item" href="changePwd">Change password</a></li>
+        			<li><a class="dropdown-item text-danger" href="deleteUser">Request account deletion</a></li>
         		</ul>
         </li>
      <li class="nav-link"><span class="container col-6"></span></li>

@@ -5,36 +5,81 @@
 <struts>
     
     <package name="banking" extends="struts-default">
-    
+    	<interceptors>
+	<interceptor name="loginInterceptor" class="org.interceptors.LoginInterceptor"/>
+	<interceptor-stack name="loginStack">
+		<interceptor-ref name="loginInterceptor"/>
+		<interceptor-ref name="defaultStack"/>
+	</interceptor-stack>
+	</interceptors>
+	
+		
+		<global-results>
+			<result name="error">/pages/error.jsp</result>
+			<result name="login">/pages/loginUser.jsp</result>
+			<result name="invalid.token">/pages/home.jsp</result>
+		</global-results>
+		
+		<global-exception-mappings>
+			<exception-mapping
+				exception="org.apache.struts.register.exceptions.SecurityBreachException"
+				result="securityerror" />
+			<exception-mapping exception="java.lang.Exception"
+				result="error" />
+		</global-exception-mappings>
+	
 		<action name="creditPage" class="org.actions.Banking"
 			method="credit">
+			<interceptor-ref name="loginStack"/>
 			<result name="success">pages/banking.jsp</result>
 		</action>
 		
 		<action name="debitPage" class="org.actions.Banking"
 			method="debit">
+			<interceptor-ref name="loginStack"/>
 			<result name="success">pages/banking.jsp</result>
 		</action>
 		
 		<action name="transferPage" class="org.actions.Banking"
 			method="transfer">
+			<interceptor-ref name="loginStack"/>
 			<result name="success">pages/banking.jsp</result>
 		</action>
 		
 		<action name="credit" class="org.actions.CreditAction"
 			method="creditBalance">
-			<result name="success"> pages/banking.jsp </result>
+			<interceptor-ref name="token"/>
+			<interceptor-ref name="loginStack"/>
+			<result name="success">pages/banking.jsp </result>
 		</action>
 		
 		<action name="debit" class="org.actions.DebitAction"
 			method="debitBalance">
-			<result name="success"> pages/banking.jsp</result>
+			<interceptor-ref name="token"/>
+			<interceptor-ref name="loginStack"/>
+			<result name="success">pages/banking.jsp</result>
 		</action>
 		
 		<action name="transfer" class="org.actions.TransferAction"
 			method="transferBalance">
+			<interceptor-ref name="token"/>
+			<interceptor-ref name="loginStack"/>
 			<result name="success">pages/banking.jsp</result>
 		</action>
+		
+		<action name="showTransactions" class="org.actions.ShowTransactions" method="showTransactions">
+			<interceptor-ref name="loginStack"/>
+			<result name="success">pages/transactions.jsp</result>
+		</action>
+		
+		<action name="changePwd">
+			<interceptor-ref name="loginStack"/>
+			<result>pages/changePwd.jsp</result>
+		</action>
+		
+	<action name="changePassword" class="org.actions.ChangePassword" method="updatePassword">
+		<result>/pages/changePwd.jsp</result>
+	</action>
 		
 		
 </package>

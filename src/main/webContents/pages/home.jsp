@@ -11,12 +11,31 @@
 <title>Home - Profile</title>
 
 <!-- Custom styling -->
-<style type="text/css"></style>
+<style type="text/css">
+ul {
+ list-style: none;
+ color:red;
+}
+
+</style>
 <jsp:include page="/pages/headers.jsp" />
 <jsp:include page="/pages/navigations.jsp" />
+
+<%
+	response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
+	response.setHeader("Expires", "0");
+	if (session.getAttribute("signed") != "true") {
+		System.out.println("Invalid login attempted.");
+		request.getRequestDispatcher("/pages/loginUser.jsp").forward(request, response);
+	} else {
+		System.out.println("valid request to profile.");
+	}
+%>
+
+
+
 </head>
-<body class="">
-<!-- bg-secondary bg-gradient -->
+<body>
 
 	<div class="container col-6">
 		<p id="error" class="container p-20 text-danger text-justify ml-20">
@@ -30,7 +49,7 @@
 			Account account = (Account) session.getAttribute("account");
 		%>
 
-		<table class="table table-bordered bg-white">
+		<table class="table bg-white">
 			<tr class="bg-dark text-white">
 				<th>Property Name</th>
 				<th>Value</th>

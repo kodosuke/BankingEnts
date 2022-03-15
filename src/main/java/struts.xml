@@ -7,9 +7,19 @@ Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 
 	<constant name="struts.devMode" value="true" />
 
+	
+
 	<package name="userRoutes" namespace="/"
 		extends="struts-default">
-
+		
+	<interceptors>
+	<interceptor name="loginInterceptor" class="org.interceptors.LoginInterceptor"/>
+	<interceptor-stack name="loginStack">
+		<interceptor-ref name="loginInterceptor"/>
+		<interceptor-ref name="defaultStack"/>
+	</interceptor-stack>
+	</interceptors>
+	
 		<global-results>
 			<result name="error">/pages/error.jsp</result>
 			<result name="login">/pages/loginUser.jsp</result>
@@ -22,7 +32,7 @@ Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 			<exception-mapping exception="java.lang.Exception"
 				result="error" />
 		</global-exception-mappings>
-
+		
 		<action name="login">
 			<result> /pages/loginUser.jsp</result>
 		</action>
@@ -32,6 +42,7 @@ Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 		</action>
 
 		<action name="home">
+		<interceptor-ref name="loginStack"/>
 			<result> /pages/home.jsp</result>
 		</action>
 
@@ -47,10 +58,18 @@ Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
 
 		<action name="logOutUser" class="org.actions.LoginUser"
 			method="logOut">
+			<interceptor-ref name="loginStack"/>
+			
 			<result name="success" type="redirect">/login</result>
 		</action>
 		
-		
+		<action name="error">
+		<result name="login"/></action>
+
+		<action name="deleteUser" class="org.actions.DeleteUser" method="deleteUser">
+			<interceptor-ref name="loginStack"/>
+			<result name="success">/pages/home.jsp</result>
+		</action>
 
 
 	</package>

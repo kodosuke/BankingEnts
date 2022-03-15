@@ -85,7 +85,7 @@ li {
 
 
 			<s:reset value="Reset" class="btn btn-warning container bg-gradient" />
-
+		<s:token/>	
 		</s:form>
 		<p class="inline">Already have an account ?</p>
 		<a href="login"

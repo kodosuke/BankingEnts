@@ -5,6 +5,22 @@
 
 <title>Home - Profile</title>
 
+<%@ taglib uri="/struts-tags" prefix="s"%>
+<jsp:include page="/pages/headers.jsp" />
+<jsp:include page="/pages/navigations.jsp" />
+
+
+<%
+	response.setHeader("Cache-Control", "no-cache,no-store,must-revalidate");
+	response.setHeader("Expires", "0");
+	if (session.getAttribute("signed") != "true") {
+		System.out.println("Invalid login attempted.");
+		request.getRequestDispatcher("/pages/loginUser.jsp").forward(request, response);
+	} else {
+		System.out.println("valid request to profile.");
+	}
+%>
+
 <!-- Custom styling -->
 <style type="text/css">
 .bg {
@@ -17,6 +33,7 @@
 
 #targetHead {
 	text-transform: capitalize;
+	margin-bottom:60px;
 }
 
 .btn {
@@ -42,17 +59,13 @@ li {
 	list-style: none;
 }
 </style>
-<%@ taglib uri="/struts-tags" prefix="s"%>
-<jsp:include page="/pages/headers.jsp" />
-<jsp:include page="/pages/navigations.jsp" />
-
 </head>
 <body>
 
 	<div class="container col-8 bg">
 
 		<input hidden="true" id="action" value="${sessionScope.action}" />
-
+		<p id="targetHead" class="text-primary h5"></p>
 		<s:form class="container col-10" name="bankingForm" action="">
 			<p id="message"
 				class="container p-20 text-success text-justify ml-20">
@@ -61,7 +74,6 @@ li {
 			<p id="error" class="container p-20 text-danger text-justify ml-20">
 				<s:actionerror />
 			</p>
-			<p id="targetHead" class="text-primary"></p>
 			<%
 			if (session.getAttribute("action").equals("transfer")) {
 			%>
@@ -74,8 +86,9 @@ li {
 			<%
 			}
 			%>
-			<s:textfield name="amount" label="Enter the amount" min="1"
+			<s:textfield name="amount" label="Enter the amount" min="1" max="50000"
 				type="number" step="0.01" class="form-control" id="number"/>
+				<s:token/>
 			<s:submit id="action-btn" onclick="return validateThisForm();"
 				class="btn btn-dark container col-6 bg-dark bg-gradient text-white align-middle action-btn" />
 			<s:reset value="Reset"

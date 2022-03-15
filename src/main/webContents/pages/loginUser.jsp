@@ -61,7 +61,7 @@ li {
 				
 			<s:textfield name="password" label="Enter your account password "
 				required="true" class="form-control" type="password" />
-				
+			<s:token/>	
 			<s:submit value="Log In" class="btn btn-dark text-white container bg-gradient pt-25" onclick="return validateThis();"/>
 			<s:reset value="Reset" class="btn btn-warning container bg-gradient" />
 		</s:form>

@@ -143,5 +143,27 @@ public class AccountDao implements AccountDialects{
         return account;
 		
 	}
+	
+    public static void updatePassword(Account account) throws SQLException, IOException, ClassNotFoundException {
+        int accountNumber = account.getAccountNumber();
+        String password = account.getPassword();
+
+        Connection connection = DataBaseCon.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(UPDATE_PASSWORD);
+        preparedStatement.setString(1, password);
+        preparedStatement.setInt(2, accountNumber);
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
+        connection.close();
+    }
+    public static void deleteAccount(int accountNumber) throws SQLException, IOException, ClassNotFoundException {
+        Connection connection = DataBaseCon.getConnection();
+        PreparedStatement preparedStatement = connection.prepareStatement(DELETE_ACCOUNT);
+        preparedStatement.setInt(1, accountNumber);
+        preparedStatement.executeUpdate();
+        preparedStatement.close();
+        connection.close();
+
+    }
 
 	}

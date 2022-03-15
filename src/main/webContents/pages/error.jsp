@@ -11,9 +11,6 @@
 </style>
 
 
-<div class="d-flex justify-content-center align-items-center" id="main">
-    <h1 class="mr-3 pr-3 align-top border-right inline-block align-content-center">404</h1>
-    <div class="inline-block align-middle">
-    	<h2 class="font-weight-normal lead" id="desc">The page you requested was not found.</h2>
-    </div>
+<div class="container" id="main">
+<img src="https://cdn.dribbble.com/users/1537480/screenshots/7199901/media/04f1bc09a3a16f5efc155fe9ea829cbc.png" class="container">
 </div>

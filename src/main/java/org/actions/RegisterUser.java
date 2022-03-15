@@ -27,6 +27,9 @@ public class RegisterUser extends ActionSupport implements SessionAware{
 	private Type accountType;
 	private float balance;
 	private long creationTime;
+	String token;
+	public void setToken(String token) { this.token = token; }
+	public String getToken() { return token; }
 	
 	private SessionMap<String, Object> sessionMap;
 

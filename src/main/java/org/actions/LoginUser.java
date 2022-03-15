@@ -14,6 +14,9 @@ public class LoginUser extends ActionSupport implements SessionAware{
 	
 	private String contact;
 	private String password;
+	String token;
+	public void setToken(String token) { this.token = token; }
+	public String getToken() { return token; }
 	
 	private SessionMap<String, Object> sessionMap;
 	
