@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts  
+Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+
+	<constant name="struts.devMode" value="true" />
+
+	<package name="userRoutes" namespace="/"
+		extends="struts-default">
+
+		<global-results>
+			<result name="error">/pages/error.jsp</result>
+			<result name="login">/pages/loginUser.jsp</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<exception-mapping
+				exception="org.apache.struts.register.exceptions.SecurityBreachException"
+				result="securityerror" />
+			<exception-mapping exception="java.lang.Exception"
+				result="error" />
+		</global-exception-mappings>
+
+		<action name="login">
+			<result> /pages/loginUser.jsp</result>
+		</action>
+
+		<action name="register">
+			<result> /pages/registerUser.jsp</result>
+		</action>
+
+		<action name="home">
+			<result> /pages/home.jsp</result>
+		</action>
+
+		<action name="registerUser" class="org.actions.RegisterUser"
+			method="register">
+			<result name="success" type="redirect">/home</result>
+		</action>
+
+		<action name="loginUser" class="org.actions.LoginUser"
+			method="login">
+			<result name="success" type="redirect">/home</result>
+		</action>
+
+		<action name="logOutUser" class="org.actions.LoginUser"
+			method="logOut">
+			<result name="success" type="redirect">/login</result>
+		</action>
+		
+		
+
+
+	</package>
+	<include file="banking.xml"/>
+	
+
+</struts>

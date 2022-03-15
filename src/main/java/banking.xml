@@ -1,0 +1,41 @@
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+"http://struts.apache.org/dtds/struts-2.0.dtd">
+ 
+<struts>
+    
+    <package name="banking" extends="struts-default">
+    
+		<action name="creditPage" class="org.actions.Banking"
+			method="credit">
+			<result name="success">pages/banking.jsp</result>
+		</action>
+		
+		<action name="debitPage" class="org.actions.Banking"
+			method="debit">
+			<result name="success">pages/banking.jsp</result>
+		</action>
+		
+		<action name="transferPage" class="org.actions.Banking"
+			method="transfer">
+			<result name="success">pages/banking.jsp</result>
+		</action>
+		
+		<action name="credit" class="org.actions.CreditAction"
+			method="creditBalance">
+			<result name="success"> pages/banking.jsp </result>
+		</action>
+		
+		<action name="debit" class="org.actions.DebitAction"
+			method="debitBalance">
+			<result name="success"> pages/banking.jsp</result>
+		</action>
+		
+		<action name="transfer" class="org.actions.TransferAction"
+			method="transferBalance">
+			<result name="success">pages/banking.jsp</result>
+		</action>
+		
+		
+</package>
+</struts>		
