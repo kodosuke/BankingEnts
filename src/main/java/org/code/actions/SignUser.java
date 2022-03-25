@@ -182,41 +182,6 @@ public class SignUser extends ActionSupport implements SessionAware {
 		return SUCCESS;
 	}
 
-	public String deleteUser() throws IOException, ClassNotFoundException, SQLException {
-		
-		ArrayList<Object> list = new ArrayList<>();
-		Word word = new Word();
-		Gson gson = new Gson();
-		
-		HttpServletResponse response = ServletActionContext.getResponse();
-
-		Customer customer = (Customer) sessionMap.get("CUSTOMER");
-		Account account = (Account) sessionMap.get("ACCOUNT");
-
-		if (account.getBalance() == 0) {
-			
-			CustomerDao.deleteCustomer(customer.getCustomerID());
-			sessionMap.invalidate();
-			response.setContentType("text/html");
-			return LOGIN;
-			
-		} else {
-			
-			word.error = "Due to the fact that your balance exceeds 0, we are not able to delete your account.";
-			list.add(word);
-			data = gson.toJson(list);
-
-			response.setContentType("application/json");
-
-			PrintWriter out = response.getWriter();
-
-			out.write(data);
-			out.flush();
-			out.close();
-
-			return SUCCESS;
-		}
-	}
 	
 	public String logOutUser() {
 		sessionMap.clear();

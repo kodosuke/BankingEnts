@@ -64,21 +64,6 @@ function showAddBeneficiary() {
   });
 }
 
-function requestDeletion() {
-  $.getJSON({
-    url: "/Banking/api/deleteUser",
-    success: (data) => {
-		if(data[0].error != null) {
-	      alert(data[0].error);
-
-      $(".hidden").hide(0, () => {
-        $("#userProfile_container").show();
-      })
-		} 
-    },
-  });
-  
-}
 
 function submitChangePassword() {
   document.getElementById("changePassword_error").innerText = "";
