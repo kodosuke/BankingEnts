@@ -1,0 +1,84 @@
+:root {
+	--primary-color :#2d6a4f;
+	--secondary-color :#264653;
+	--tertiary-color :#d8e2dc;
+}
+
+#error,
+#loginUser_error,
+#registerUser_error {
+	color : red;
+	font-style: italic;
+}
+
+* {
+	font-family: Poppins;
+	font-weight: 300;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+}
+
+.mainContainer {
+	width: 50%;
+	margin: auto;
+}
+
+table {
+	width: 100%;
+}
+
+input, input[type="radio"]+label, input[type="checkbox"]+label:before,
+	select option, select {
+	width: 100%;
+	padding: 1em;
+	line-height: 1.4;
+	background-color: #f9f9f9;
+	border: 1px solid #e5e5e5;
+	border-radius: 3px;
+	transition: all 0.35s ease-in-out;
+	box-sizing: border-box;
+	height: 1.4;
+}
+
+.heading {
+	color : var(--secondary-color);
+}
+
+button,
+input[type="button"] {
+	outline: none;
+	margin-top: 20px;
+	height: 60px;
+	width: 100%;
+	color: #fff;
+	background-color: var(--primary-color);
+	border-radius: 40px;
+	border: none;
+	cursor: pointer;
+	font-weight: 500;
+}
+
+input[type="reset"] {
+	margin-top: 15px;
+	border-radius: 40px;
+	cursor: pointer;
+	height:60px;
+	font-weight: 500;
+}
+
+.secondary {
+	background-color: var(--tertiary-color);
+	color: #264653;
+}
+
+button:hover,
+input[type="button"]:hover {
+	box-shadow: 10px 10px 60px -20px var(--primary-color);
+}
+
+td:nth-child(2) {
+	font-family: JetBrains mono;
+}

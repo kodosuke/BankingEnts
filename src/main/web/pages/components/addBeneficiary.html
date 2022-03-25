@@ -1,0 +1,70 @@
+<div class="mainContainer">
+  <h1 class="heading" id="textHead">Add beneficiary details</h1>
+  
+  <p id="addBeneficiary_message" class="message"></p>
+  <p id="addBeneficiary_error" class="error"></p>
+  
+  <div>
+    <form
+      id="addBeneficiaryForm"
+      name="addBeneficiaryForm"
+      action="/Banking/api/addBeneficiary"
+    >
+      <table>
+        <tr>
+          <td>
+            <label for="beneficiaryAccountNumber"
+              >Enter the recipient account number :</label
+            >
+          </td>
+          <td>
+            <input
+              type="number"
+              name="beneficiaryAccountNumber"
+              id="beneficiaryAccountNumber"
+              min="786001"
+              step="1"
+              required
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td>
+            <label for="beneficiaryContact"
+              >Enter the e mail address of the recipient:</label
+            >
+          </td>
+          <td>
+            <input
+              type="email"
+              name="beneficiaryContact"
+              id="beneficiaryContact"
+              required
+            />
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+            <div align="right">
+              <input
+                type="button"
+                value="Add"
+                onclick="submitNewBeneficiary()"
+              />
+            </div>
+          </td>
+        </tr>
+
+        <tr>
+          <td colspan="2">
+            <div align="right">
+              <input type="reset" value="Reset" class="secondary" />
+            </div>
+          </td>
+        </tr>
+      </table>
+    </form>
+  </div>
+</div>

@@ -1,0 +1,42 @@
+<div id="creditContainer" class="mainContainer">
+  <h1 class="heading">Credit balance.</h1>
+
+  <p id="creditBalance_message" class="message"></p>
+  <p id="creditBalance_error" class="error"></p>
+
+  <form
+    id="creditBalanceForm"
+    class=""
+    action="/Banking/api/creditBalance"
+    name="creditBalanceForm"
+  >
+    <table>
+      <tr>
+        <td><label for="number" class="label"> Enter the amount: </label></td>
+        <td>
+          <input type="number" name="amount" min="1" max="50000" step="0.01" />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div align="right">
+            <input
+              type="button"
+              value="Deposit"
+              onclick="submitCreditBalance();"
+              style="margin-top: 20px"
+            />
+          </div>
+        </td>
+      </tr>
+
+      <tr>
+        <td colspan="2">
+          <div align="right">
+            <input type="reset" value="Reset" class="secondary" />
+          </div>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>

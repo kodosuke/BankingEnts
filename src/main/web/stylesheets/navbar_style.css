@@ -1,0 +1,76 @@
+:root {
+	--primary-color :#4361ee;
+	--secondary-color :#4361ee;
+	--tertiary-color :#ade8f4;
+}
+
+nav {
+	background: var(--primary-color);
+	color: #fff;
+}
+
+ul {
+	list-style: none;
+	padding: 0;
+	margin: 0;
+	background: var(--primary-color);
+}
+
+ul li {
+	display: block;
+	position: relative;
+	float: left;
+	background: var(--primary-color);
+	cursor: pointer;
+}
+
+li ul {
+	display: none;
+	padding-left:5px;
+}
+
+ul li a {
+	display: block;
+	padding: 1em;
+	text-decoration: none;
+	white-space: nowrap;
+	color: #fff;
+}
+
+ul li a:hover {
+	background: var(--tertiary-color);
+	color : var(--secondary-color);
+}
+
+li:hover > ul {
+	display: block;
+	position: absolute;
+}
+
+li:hover li {
+	float: none;
+}
+
+li:hover a {
+	background: var(--tertiary-color);
+	color : var(--secondary-color);
+}
+
+li:hover li a:hover {
+	background-color : var(--secondary-color);
+	color:#fff;
+}
+
+ul ul ul {
+	left: 100%;
+	top: 0;
+}
+
+ul:before, ul:after {
+	content: " "; 
+	display: table; 
+}
+
+ul:after {
+	clear: both;
+}

@@ -1,0 +1,76 @@
+<div class="mainContainer">
+  <h1 id="targetHead" class="heading">Transfer your balance.</h1>
+  <p id="transferBalance_message" class="message"></p>
+  <p id="transferBalance_error" class="error"></p>
+  <form
+    name="transferBalanceForm"
+    action="/Banking/api/transferBalance"
+    id="transferBalanceForm"
+  >
+    <table>
+      <tr>
+        <td>
+          <label for="recipientAccountNumber">
+            Enter the recipient account Number:
+          </label>
+        </td>
+        <td>
+          <input
+            type="number"
+            name="recipientAccountNumber"
+            id="recipientAccountNumber"
+            min="786001"
+            step="1"
+            required
+          />
+        </td>
+      </tr>
+      <tr>
+        <td>
+          <label for="recipientContact">
+            Enter the e mail address of the recipient:
+          </label>
+        </td>
+        <td>
+          <input
+            type="email"
+            name="recipientContact"
+            id="recipientContact"
+            required
+          />
+        </td>
+      </tr>
+      <tr>
+        <td><label for="number"> Enter the amount: </label></td>
+        <td>
+          <input
+            type="number"
+            name="amount"
+            required
+            min="1"
+            max="10000"
+            step="0.01"
+          />
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div align="right">
+            <button 
+            	type="button" 
+            	onclick="submitTransferBalance()">
+            		Transfer
+       		</button>
+          </div>
+        </td>
+      </tr>
+      <tr>
+        <td colspan="2">
+          <div align="right">
+            <input type="reset" value="Reset" class="secondary" />
+          </div>
+        </td>
+      </tr>
+    </table>
+  </form>
+</div>

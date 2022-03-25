@@ -1,0 +1,53 @@
+<div class="navbar">
+  <ul>
+    <li>
+      <a onclick="fetchUserProfile()"> Home </a>
+    </li>
+    <li>
+      <a> Retail Banking &#8675 </a>
+      <ul>
+        <li>
+          <a onclick="showCreditBalance()"> Credit Balance </a>
+        </li>
+        <li>
+          <a onclick="showDebitBalance()"> Debit Balance </a>
+        </li>
+        <li>
+          <a onclick="showTransferBalance()"> Transfer Balance </a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a> Beneficiaries &#8675 </a>
+      <ul>
+        <li>
+          <a onclick="fetchBeneficiaries()"> View Beneficiaries </a>
+        </li>
+        <li>
+          <a onclick="showAddBeneficiary()"> Add Beneficiary </a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a onclick="fetchTransactions()"> View transactions </a>
+    </li>
+
+    <li>
+      <a> Account Settings &#8675</a>
+
+      <ul>
+        <li>
+          <a onclick="showChangePassword()"> Change Password </a>
+        </li>
+        <li>
+          <a onclick="requestDeletion()"> Request account deletion </a>
+        </li>
+      </ul>
+    </li>
+    <li>
+      <a href="logOutUser"> Log Out </a>
+    </li>
+
+    <li></li>
+  </ul>
+</div>

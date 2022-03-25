@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts  
+Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+
+<struts>
+
+	<constant name="struts.devMode" value="true" />
+	
+	<package name="client" namespace="/api" extends="struts-default, json-default">
+
+		<result-types>
+	        <result-type name="json" class="org.apache.struts2.json.JSONResult"/>
+	    </result-types>
+	    
+		<interceptors>
+		<interceptor name="loginInterceptor" class="org.code.interceptors.LoginInterceptor"/>
+			<interceptor-stack name="loginStack">
+				<interceptor-ref name="loginInterceptor"/>
+				<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+		
+		<global-results>
+			<result name="login" type="redirect">/login</result>
+		</global-results>
+		
+		<action name="">
+			<result>
+				/pages/testing.html
+			</result>
+		</action>
+
+		
+		<action name="loginUser" class="org.code.actions.SignUser" method="loginUser">
+			<result name="success" type="json"/>
+		</action>
+		
+		<action name="registerUser" class="org.code.actions.SignUser" method="registerUser">
+			<result name="success" type="json"/>
+		</action>
+		
+		<action name="deleteUser" class="org.code.actions.SignUser" method="deleteUser">
+			<result name="success" type="json"/> 
+			<result name="login" type="redirect">/login </result>
+		</action>
+		
+		<action name="profile" class="org.code.actions.UserAction" method="readUser">
+			<interceptor-ref name="loginStack"/>
+				<result name="success" type="json"/>
+		</action>
+		
+		<action name="changePassword" class="org.code.actions.ChangePasswordAction" method="updatePassword">
+			<interceptor-ref name="loginStack"/>
+				<result name="success" type="json"/>
+		</action>
+		
+		<action name="creditBalance" class="org.code.actions.BankingAction" method="creditBalance">
+			<interceptor-ref name="loginStack"/>
+				<result name="success" type="json"/>
+		</action>
+		
+		<action name="debitBalance" class="org.code.actions.BankingAction" method="debitBalance">
+			<interceptor-ref name="loginStack"/>
+				<result name="success" type="json"/>
+		</action>
+		
+		<action name="transferBalance" class="org.code.actions.TransferAction" method="transferBalance">
+			<interceptor-ref name="loginStack"/>
+				<result name="success" type="json"/>
+		</action>
+		
+		<action name="addBeneficiary" class="org.code.actions.Beneficiaries" method="addBeneficiary">
+			<interceptor-ref name="loginStack"/>
+				<result name="success" type="json"/>
+		</action>
+		
+		<action name="getBeneficiaries" class="org.code.actions.Beneficiaries" method="getBeneficiaries">
+			<interceptor-ref name="loginStack"/>
+				<result name="success" type="json"/>
+		</action>
+		
+		<action name="getTransactions" class="org.code.actions.UserAction" method="getTransactions">
+			<interceptor-ref name="loginStack"/>
+				<result name="success" type="json"/>
+		</action>
+		
+	</package>
+
+</struts>
