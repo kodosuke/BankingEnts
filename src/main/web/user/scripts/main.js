@@ -386,9 +386,13 @@ const viewTransactions= () => {
 	amount.textContent = "Amount";
 	let mode = document.createElement("th");
 	mode.textContent = "Transaction Mode";
+	let descr = document.createElement("th");
+	descr.textContent = "Description";
 	let creationTime = document.createElement("th");
 	creationTime.textContent = "Transaction time" ;
-	headerRow.append(txnHash, amount, mode, creationTime);
+	let closingBalance = document.createElement("th");
+	closingBalance.textContent = "Closing Balance";
+	headerRow.append(txnHash, amount, mode, descr, creationTime, closingBalance);
 	thead.append(headerRow);
 	txnTable.appendChild(thead);
 	
@@ -404,10 +408,12 @@ const viewTransactions= () => {
 				amount.textContent = data[i].amount;
 				let mode = document.createElement("td");
 				mode.textContent = data[i].mode;
+				let descr = document.createElement("th");
+				descr.textContent = data[i].description;
 				let creationTime = document.createElement("td");
 				creationTime.textContent = new Date(data[i].creationTime).toUTCString();
-				
-				row.append(txnHash, amount, mode, creationTime);
+				let closingBalance = data[i].closingBalance;
+				row.append(txnHash, amount, mode, descr, creationTime, closingBalance);
 				txnTable.appendChild(row);
 			}
 			baseContainer.appendChild(txnTable);

@@ -54,19 +54,16 @@ public class Beneficiaries extends ActionSupport{
 		int recipientID = CustomerDao.checkIfPresent(beneficiaryContact);
 		int sender = ((Account) session.getAttribute("ACCOUNT")).getAccountNumber();
 		
-		if (recipientID != 0) {
+		if (recipientID != 0 ) {
+			
 			Account destination = AccountDao.findAccountByCustomerID(recipientID);
 			if (destination.getAccountNumber() == beneficiaryAccountNumber) {
 				
 				if (! BeneficiaryDao.checkIfPresent(sender, beneficiaryAccountNumber)) {
-				Beneficiary beneficiary = new Beneficiary();
-				beneficiary.setSender(sender);
-				beneficiary.setRecipient(beneficiaryAccountNumber);
-				beneficiary.setRecipientContact(beneficiaryContact);
-				
-				BeneficiaryDao.insertBeneficiary(beneficiary);
-				
+
+				BeneficiaryDao.insertBeneficiary(sender, beneficiaryAccountNumber);
 				word.setMessage("Beneficiary added.");
+				
 				} else {
 					word.setError("Beneficiary already exists.");
 				}

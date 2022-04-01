@@ -50,7 +50,8 @@ public class BankingAction extends ActionSupport {
 		
 		if (account.deposit(amount)) {
 			AccountDao.updateBalance(account);
-			Transaction txn = new Transaction(account.getAccountNumber(), amount, TransactionMode.CREDIT, new Date().getTime());
+			String description = "Self deposit";
+			Transaction txn = new Transaction(account.getAccountNumber(), amount, TransactionMode.CREDIT_BY_SELF, new Date().getTime(), account.getBalance(), description);
 			TransactionDao.insertTransaction(txn);
 			word.setMessage("Your account has been credited with the amount. Current Balance " + account.getBalance());
 			
@@ -68,7 +69,8 @@ public class BankingAction extends ActionSupport {
 		out.write(jsonString);
 		out.flush();
 		out.close();
-			
+		
+		System.out.println(jsonString);
 		return SUCCESS;
 	}
 	
@@ -91,7 +93,8 @@ public class BankingAction extends ActionSupport {
 		
 		if (account.withdraw(amount)) {
 			AccountDao.updateBalance(account);
-			Transaction txn = new Transaction(account.getAccountNumber(), amount, TransactionMode.DEBIT, new Date().getTime());
+			String description = "Self withdrawal";
+			Transaction txn = new Transaction(account.getAccountNumber(), amount, TransactionMode.DEBIT_BY_SELF, new Date().getTime(), account.getBalance(), description);
 			TransactionDao.insertTransaction(txn);
 			word.setMessage("Your account has been debited with the amount. Current Balance " + account.getBalance());
 			
@@ -109,7 +112,7 @@ public class BankingAction extends ActionSupport {
 		out.write(jsonString);
 		out.flush();
 		out.close();
-			
+		System.out.println(jsonString);	
 		return SUCCESS;
 	}
 	

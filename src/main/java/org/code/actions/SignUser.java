@@ -15,10 +15,13 @@ import org.apache.struts2.dispatcher.SessionMap;
 import org.apache.struts2.interceptor.SessionAware;
 import org.code.dao.AccountDao;
 import org.code.dao.CustomerDao;
+import org.code.dao.TransactionDao;
 import org.code.enums.AccountType;
 import org.code.enums.Gender;
+import org.code.enums.TransactionMode;
 import org.code.models.Account;
 import org.code.models.Customer;
+import org.code.models.Transaction;
 import org.code.utils.PasswordSecurity;
 
 import com.google.gson.Gson;
@@ -164,6 +167,11 @@ public class SignUser extends ActionSupport implements SessionAware {
 			Account account = new Account(customerID, accountType, balance, creationTime);
 
 			account.setAccountNumber(AccountDao.insertNewAccount(account));
+			
+			if(balance != 0) {
+				Transaction txn = new Transaction(account.getAccountNumber(), balance, TransactionMode.CREDIT_BY_SELF ,new Date().getTime(), balance, "Account opening balance");
+				TransactionDao.insertTransaction(txn);
+			}
 			word.message = "Your account has been registered successfully.";
 			list.add(word);
 			list.add(customer);

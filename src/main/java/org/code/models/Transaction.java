@@ -9,8 +9,28 @@ public class Transaction {
     float amount;
     TransactionMode mode;
     long creationTime;
+    float closingBalance;
+    String description;
+    
+    
 
-    public long getTxnHash() {
+    public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public float getClosingBalance() {
+		return closingBalance;
+	}
+
+	public void setClosingBalance(float closingBalance) {
+		this.closingBalance = closingBalance;
+	}
+
+	public long getTxnHash() {
         return txnHash;
     }
 
@@ -53,25 +73,29 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(int accountNumber, float amount, TransactionMode mode, long creationTime) {
+    public Transaction(int accountNumber, float amount, TransactionMode mode, long creationTime, float closingBalance, String description) {
         this.accountNumber = accountNumber;
         this.amount = amount;
         this.mode = mode;
         this.creationTime = creationTime;
+        this.closingBalance = closingBalance;
+        this.description = description;
         this.txnHash = this.generateTransactionHash();
     }
 
-    public Transaction(long txnHash, int accountNumber, float amount, TransactionMode mode, long creationTime) {
+    public Transaction(long txnHash, int accountNumber, float amount, TransactionMode mode, long creationTime, float closingBalance, String description) {
         this.txnHash = txnHash;
         this.accountNumber = accountNumber;
         this.amount = amount;
         this.mode = mode;
         this.creationTime = creationTime;
+        this.closingBalance = closingBalance;
+        this.description = description;
     }
 
     public long generateTransactionHash() {
 
-        String txnInfo = this.toString();
+        String txnInfo = this.getData();
         long hash = 9081726354L;
 
         for (int i = 0; i < txnInfo.length(); i++)
@@ -80,11 +104,14 @@ public class Transaction {
 
     }
 
-    @Override
-    public String toString() {
+
+    public String getData() {
         return "Transaction [accountNumber=" + accountNumber +
                 ", amount=" + amount +
                 ", mode=" + mode +
-                ", creationTime=" + creationTime + "]";
+                ", creationTime=" + creationTime + 
+                ", closingBalance=" + closingBalance + 
+                ", description=" + description +
+                "]";
     }
 }

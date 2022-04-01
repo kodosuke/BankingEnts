@@ -12,13 +12,12 @@ import org.code.utils.DBConnection;
 
 public class BeneficiaryDao implements BeneficiaryDialects{
 	
-	public static void insertBeneficiary(Beneficiary beneficiary) throws ClassNotFoundException, SQLException {
+	public static void insertBeneficiary(int sender, int recipient) throws ClassNotFoundException, SQLException {
 		
 		Connection connection = DBConnection.getConnection();
 		PreparedStatement preparedStatement = connection.prepareStatement(INSERT_BENEFICIARY);
-		preparedStatement.setInt(1, beneficiary.getSender());
-		preparedStatement.setInt(2, beneficiary.getRecipient());
-		preparedStatement.setString(3, beneficiary.getRecipientContact());
+		preparedStatement.setInt(1, sender);
+		preparedStatement.setInt(2, recipient);
 		preparedStatement.executeUpdate();
 		preparedStatement.close();
 		connection.close();
@@ -62,4 +61,5 @@ public class BeneficiaryDao implements BeneficiaryDialects{
     	}
         return returned == 1;
 	 }
+	
 }

@@ -78,4 +78,12 @@ public class AccountDao implements AccountDialects {
 
     }
     
+    public static ResultSet getCompleteInfoOnAccount( int accountNumber) throws ClassNotFoundException, SQLException {
+		
+    	Connection connection = DBConnection.getConnection();
+    	PreparedStatement preparedStatement = connection.prepareStatement(JOIN_CUSTOMER_AND_ACCOUNT);
+    	preparedStatement.setInt(1, accountNumber);
+    	return preparedStatement.executeQuery();
+    }
+    
 }

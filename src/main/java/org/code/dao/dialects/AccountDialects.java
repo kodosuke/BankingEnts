@@ -15,5 +15,7 @@ public interface AccountDialects {
     String READ_ACCOUNT = "SELECT * FROM accounts WHERE customerID = ?";
     String UPDATE_BALANCE = "UPDATE accounts SET balance = ? WHERE accountNumber = ?";
     String DELETE_ACCOUNT = "DELETE FROM accounts WHERE accountNumber = ?";
+    
+    String JOIN_CUSTOMER_AND_ACCOUNT = "SELECT * FROM customers JOIN accounts USING(customerID) WHERE accountNumber = ?";
 
 }

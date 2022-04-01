@@ -22,6 +22,8 @@ public class TransactionDao implements TxnDialects{
         preparedStatement.setFloat(3, transaction.getAmount());
         preparedStatement.setString(4, transaction.getMode().name());
         preparedStatement.setLong(5, transaction.getCreationTime());
+        preparedStatement.setFloat(6, transaction.getClosingBalance());
+        preparedStatement.setString(7, transaction.getDescription());
         int rowsModified = preparedStatement.executeUpdate();
 
         preparedStatement.close();
@@ -44,8 +46,10 @@ public class TransactionDao implements TxnDialects{
             float amount = resultSet.getFloat(AMOUNT);
             TransactionMode mode = TransactionMode.valueOf(resultSet.getString(MODE));
             long createTime = resultSet.getLong(TXN_TIMESTAMP);
+            float closingBalance = resultSet.getFloat(CLOSING_BALANCE);
+            String description = resultSet.getString(DESCRIPTION);
 
-            Transaction txn = new Transaction(txnHash, accountNumber, amount, mode, createTime);
+            Transaction txn = new Transaction(txnHash, accountNumber, amount, mode, createTime, closingBalance ,description);
             transactions.add(txn);
         }
 
