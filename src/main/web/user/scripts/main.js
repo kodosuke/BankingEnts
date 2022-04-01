@@ -376,6 +376,12 @@ const viewTransactions= () => {
 	let baseContainer = cleanBaseContainer();
 	baseContainer.appendChild(textHead);
 	
+	let rowsPerPage = document.createElement("p");
+	rowsPerPage.textContent = "10 rows per page";
+	rowsPerPage.dataset.value = 10;
+	rowsPerPage.id = "rowsPerPage";
+	baseContainer.append(rowsPerPage);
+	
 	const txnTable = document.createElement("table");
 	
 	let thead = document.createElement("thead");
@@ -395,6 +401,8 @@ const viewTransactions= () => {
 	headerRow.append(txnHash, amount, mode, descr, creationTime, closingBalance);
 	thead.append(headerRow);
 	txnTable.appendChild(thead);
+	const tbod = document.createElement("tbody");
+	tbod.id = "transactionsTable";
 	
 	$.getJSON({
 		url : "/banking/api/viewTransactions",
@@ -414,9 +422,76 @@ const viewTransactions= () => {
 				creationTime.textContent = new Date(data[i].creationTime).toUTCString();
 				let closingBalance = data[i].closingBalance;
 				row.append(txnHash, amount, mode, descr, creationTime, closingBalance);
-				txnTable.appendChild(row);
+				tbod.appendChild(row);
+
 			}
+			
+			window.tbod = tbod;
+			
+			txnTable.append(tbod);
 			baseContainer.appendChild(txnTable);
+			
+			
+			const paginationContainer = document.createElement("div");
+			paginationContainer.id = "pagination";
+			
+			const prevButton = document.createElement("button");
+			prevButton.id = "prevBtn";
+			prevButton.textContent = "<< Previous";
+			
+			prevButton.addEventListener("click", () => {
+				
+				$("#pager").val(
+					
+					$("#pager").val() > 1 ? $("#pager").val() - 1 : 1
+				)
+				paginate();
+			})
+			
+			const pager = document.createElement("select");
+			pager.id = "pager";
+			for(let i = 1; i <= (data.length/10) + 1; i++) {
+				let option = document.createElement("option");
+				option.value = i;
+				option.textContent = i;
+				pager.append(option);
+			}
+			
+			const nextButton = document.createElement("button");
+			nextButton.id = "nextBtn";
+			nextButton.textContent = "Next >>"
+			
+			
+			nextButton.addEventListener("click", () => {
+				console.log(data.length)
+				
+				let pgNum = parseInt($("#pager").val());
+				console.log(pgNum);
+				
+				let maxPgN = (parseInt(data.length / 10)) + 1
+				console.log(maxPgN)
+				console.error(pgNum < maxPgN ? pgNum + 1 : pgNum)
+				$("#pager").val(
+					pgNum < maxPgN ? pgNum + 1 : pgNum
+				)
+				console.log($("#pager").val());
+				paginate();
+			})
+			paginationContainer.append(prevButton);
+			paginationContainer.append(pager);
+			paginationContainer.append(nextButton);
+			
+			baseContainer.append(paginationContainer);
+			
+
+			
+			$(pager)
+				.on("change", (evt) => {
+					paginate();					
+				})
+				
+			paginate();
+			
 		},
 		error: (data) => {
 			console.error("Bad request made.");
@@ -426,6 +501,20 @@ const viewTransactions= () => {
 	})
 	
 	
+}
+
+const paginate = () => {
+					
+					let rowsPerPage = $("#rowsPerPage");
+					let pager = $("#pager");
+					
+					let maxRows = 10;
+					let pageNumber = parseInt(pager.val());
+					
+					console.log((pageNumber - 1) * maxRows);
+					console.log(pageNumber * maxRows);
+					
+					$("#transactionsTable").children().hide().slice((pageNumber - 1) * 10, pageNumber * 10).show()
 }
 const viewBeneficiaries = () => {
 	// document.getElementById("baseContainer").innerText = "viewBeneficiaries"
@@ -638,6 +727,12 @@ document.addEventListener( "DOMContentLoaded", () => {
 	
 
 })
+
+const paginateTxns = (txnTable) => {
+	
+	
+	
+}
 
 const getRecipient = () => {
 	return sessionStorage.getItem("recipientAccountNumber") || "";
